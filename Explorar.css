@@ -32,3 +32,52 @@ body {
     color: #fff;
     font-family: "Oxanium", Arial, sans-serif;
 }
+
+.pagina-explorar {
+    position: relative;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+}
+
+.sol {
+    width: clamp(4rem, 10vw, 7rem);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: #ffbd0a;
+}
+
+.orbita {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: clamp(12rem, 34vw, 22rem);
+    aspect-ratio: 1;
+    animation: orbitar 8s linear infinite;
+}
+
+.planeta {
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    width: clamp(2rem, 5vw, 3rem);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: #35bdb0;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes orbitar {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .orbita {
+        animation: none;
+    }
+}
