@@ -47,7 +47,7 @@ body {
     background: #ffbd0a;
 }
 
-.orbita {
+.orbita1 {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -56,7 +56,7 @@ body {
     animation: orbitar 8s linear infinite;
 }
 
-.planeta {
+.planeta1 {
     position: absolute;
     top: 50%;
     left: 100%;
@@ -64,6 +64,26 @@ body {
     aspect-ratio: 1;
     border-radius: 50%;
     background: #35bdb0;
+    transform: translate(-50%, -50%);
+}
+
+.orbita2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: clamp(18rem, 50vw, 32rem);
+    aspect-ratio: 1;
+    animation: orbitar 50s linear infinite;
+}
+
+.planeta2 {
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    width: clamp(2rem, 5vw, 3rem);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: #e74c3c;
     transform: translate(-50%, -50%);
 }
 
