@@ -67,9 +67,4 @@ body {
     background: #35bdb0;
 }
 
-.planeta-vermelho {
-    width: clamp(1.6rem, 2.8vw, 2.3rem);
-    aspect-ratio: 1;
-    background: #e74c3c;
-}
 

@@ -1,7 +1,4 @@
 const G = 4 * Math.PI * Math.PI;
-const passoDeTempo = 1 / 3650;
-const diasPorAno = 365.25;
-const diasSimuladosPorSegundo = 30;
 const pagina = document.querySelector(".pagina-explorar");
 const planetaAzul = {
     elemento: document.querySelector("#planeta-azul"),
@@ -11,56 +8,27 @@ const planetaAzul = {
     anguloInicial: 0,
     massaDoSol: 1,
     x: 0,
-    y: 0,
-    velocidadeX: 0,
-    velocidadeY: 0
+    y: 0
 };
-const planetaVermelho = {
-    elemento: document.querySelector("#planeta-vermelho"),
-    guia: document.querySelector("#guia-orbita-vermelha"),
-    semiEixoMaior: 1.52,
-    excentricidade: 0.08,
-    anguloInicial: Math.PI,
-    massaDoSol: 1,
-    x: 0,
-    y: 0,
-    velocidadeX: 0,
-    velocidadeY: 0
-};
-const planetas = [planetaAzul, planetaVermelho];
+const planetas = [planetaAzul];
 
 function prepararPlaneta(planeta) {
     const distanciaInicial = planeta.semiEixoMaior * (1 - planeta.excentricidade);
 /* r perielio = a(1 - e) */
-    const velocidadeInicial = Math.sqrt(
-        G * planeta.massaDoSol * (1 + planeta.excentricidade) / distanciaInicial
-    );
-/* calcula velocidade inicial, tem de ser adequada à distancia e formato da orbita, ao começar no perielio, se move mais depressa */
 
     planeta.x = distanciaInicial * Math.cos(planeta.anguloInicial);
     planeta.y = distanciaInicial * Math.sin(planeta.anguloInicial);
     /* calcula posição horizontal e vertical */
-    planeta.velocidadeX = -velocidadeInicial * Math.sin(planeta.anguloInicial);
-    planeta.velocidadeY = velocidadeInicial * Math.cos(planeta.anguloInicial);
-    /* orienta velocidade, velocidade inicial fica de lado em relaçao ao sol */
 }
 
-function moverPlanetas() {
-    for (const planeta of planetas) {
-        const distanciaAoQuadrado = planeta.x * planeta.x + planeta.y * planeta.y;
-        const distancia = Math.sqrt(distanciaAoQuadrado);
-        /* mede a distancia atual ao sol, r = sqrt(x^2 + y^2) */
-        const puxaoDoSol = -G * planeta.massaDoSol / (distancia * distancia * distancia);
-        /* calcula força gravitacional F = G * M / r^3, como a massa do planeta é desprezivel, só se usa a massa do sol, e divide-se por r^3 para obter a aceleração */
-        const aceleracaoX = puxaoDoSol * planeta.x;
-        const aceleracaoY = puxaoDoSol * planeta.y;
-
-        planeta.velocidadeX += aceleracaoX * passoDeTempo;
-        planeta.velocidadeY += aceleracaoY * passoDeTempo;
-        planeta.x += planeta.velocidadeX * passoDeTempo;
-        planeta.y += planeta.velocidadeY * passoDeTempo;
-        /* atualiza a velocidade e posição do planeta, usando a aceleração e o passo de tempo */
-    }
+function calcularAceleracao(planeta) {
+    const distanciaAoQuadrado = planeta.x * planeta.x + planeta.y * planeta.y;
+    const distancia = Math.sqrt(distanciaAoQuadrado);
+    /* mede a distancia atual ao sol, r = sqrt(x^2 + y^2) */
+    const puxaoDoSol = -G * planeta.massaDoSol / (distancia * distancia * distancia);
+    /* A aceleração vem de F = G*M*m/r^2 e a = F/m; o vetor é -G*M*(x,y)/r^3. */
+    planeta.aceleracaoX = puxaoDoSol * planeta.x;
+    planeta.aceleracaoY = puxaoDoSol * planeta.y;
 }
 
 function desenharPlanetas() {
@@ -100,32 +68,3 @@ function desenharPlanetas() {
         /* coloca planetas na posição calculada convertendo em pixeis */
     }
 }
-
-let tempoGuardado = 0;
-let instanteAnterior = 0;
-
-function animar(instanteAtual) {
-    if (instanteAnterior === 0) {
-        instanteAnterior = instanteAtual;
-    }
-
-    const segundosReais = Math.min((instanteAtual - instanteAnterior) / 1000, 0.05);
-    instanteAnterior = instanteAtual;
-
-    tempoGuardado += segundosReais * diasSimuladosPorSegundo / diasPorAno;
-
-    while (tempoGuardado >= passoDeTempo) {
-        moverPlanetas();
-        tempoGuardado -= passoDeTempo;
-    }
-
-    desenharPlanetas();
-    requestAnimationFrame(animar);
-}
-
-prepararPlaneta(planetaAzul);
-prepararPlaneta(planetaVermelho);
-desenharPlanetas();
-requestAnimationFrame(animar);
-
-window.addEventListener("resize", desenharPlanetas);
