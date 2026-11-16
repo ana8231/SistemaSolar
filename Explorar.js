@@ -85,3 +85,9 @@ function desenharPlanetas() {
     }
     /* preciso de calcular velocidade inicial e usar acelaração para atualizar posição e velocidade a cada frame */
 }
+
+prepararPlaneta(planetaAzul);
+calcularAceleracao(planetaAzul);
+desenharPlanetas();
+
+window.addEventListener('resize', desenharPlanetas);
