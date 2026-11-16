@@ -6,15 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#030d16">
     <link rel="stylesheet" href="Explorar.css">
+    <script src="Explorar.js" defer></script>
 </head>
 <body>
-    <main class="pagina-explorar" aria-label="Sistema Solar">
+    <main class="pagina-explorar" aria-label="Simulação do sistema solar">
         <div class="sol" role="img" aria-label="Sol"></div>
-        <div class="orbita1" aria-hidden="true">
-            <div class="planeta1" role="img" aria-label="Planeta azul"></div>
-        </div>
-        <div class="orbita2" aria-hidden="true">
-            <div class="planeta2" role="img" aria-label="Planeta vermelho"></div>
+        <div class="orbita-guia" id="guia-orbita-azul" aria-hidden="true"></div>
+        <div class="orbita-guia" id="guia-orbita-vermelha" aria-hidden="true"></div>
+        <div class="planeta planeta-azul" id="planeta-azul" role="img" aria-label="Planeta azul"></div>
+        <div class="planeta planeta-vermelho" id="planeta-vermelho" role="img" aria-label="Planeta vermelho"></div>
+
     </main>
 </body>
 </html>
