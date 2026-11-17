@@ -83,7 +83,7 @@ function desenharPlanetas() {
         planeta.elemento.style.top = `${centroY - planeta.y * escala}px`;
         /* coloca planetas na posição calculada convertendo em pixeis */
     }
-    /* preciso de calcular velocidade inicial e usar acelaração para atualizar posição e velocidade a cada frame */
+    /* preciso de calcular velocidade inicial e usar acelaração para atualizar posição e velocidade a cada frame (Euler-semi-implícito) */
 }
 
 prepararPlaneta(planetaAzul);
