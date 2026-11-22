@@ -43,6 +43,7 @@ body {
 }
 
 .orbita-guia {
+    display: none;
     position: absolute;
     border: 1px dashed rgb(121 180 200 / 35%);
     border-radius: 50%;
